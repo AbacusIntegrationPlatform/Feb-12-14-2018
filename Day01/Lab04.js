@@ -9,3 +9,81 @@ Create a class called Account that does the following.
 
 6) Create 2 or more Account objects and display the object count
 */
+
+class Transaction {
+	constructor(type, amount) {
+		this.type = type;
+		this.amount = amount;
+		this.date = new Date();
+	}
+}
+
+class Account {
+	constructor(balance) {
+		if(balance < 10000) {
+			throw new Error("Initial balance cannot be lesser than 10000");
+		}
+		this.balance = balance;
+		this.withdrawCount = 0;
+		this.transactions = [];
+	}
+	
+	deposit(amount) {
+		this.balance += amount;
+		this.transactions.push(new Transaction("Deposit", amount));
+	}
+	
+	withdraw(amount) {
+		this.withdrawCount += 1;
+		this.balance -= amount;
+		this.transactions.push(new Transaction("Withdraw", amount));
+		if(this.withdrawCount > 3) {
+			let fees = amount * 0.005;
+			this.balance -= fees;
+			this.transactions.push(new Transaction("Fee", fees));
+		}
+	}
+	
+	printStatement() {
+		for(let i=0; i<this.transactions.length; i++) {
+			let txn = this.transactions[i];
+			console.log(`Amount: ${txn.amount}, (${txn.type} at ${txn.date.toString()})`);
+		}
+	}
+}
+
+try {
+	let acc = new Account(1000);
+} 
+catch (e) {
+	console.log(`Error: ${e.message}`);
+}
+let account = new Account(20000);
+account.deposit(1000);
+account.deposit(1000);
+account.withdraw(100);
+account.withdraw(100);
+account.withdraw(100);
+account.withdraw(100);
+account.withdraw(200);
+account.printStatement();
+console.log(`Balance: ${account.balance}`);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
