@@ -22,3 +22,47 @@ numbers.forEach(function(num) {
 }); 
 numbers.forEach((num) => console.log(num)); 
 */
+
+let numbers = [1, 2, 3, 4, 5, 6, 30, 56, 84, 23, 100];
+
+//Print all the numbers
+numbers.forEach(n => console.log(n));
+
+//Print the sum of all numbers
+const sum = numbers.reduce((first, next) => first + next)
+console.log(`Sum: ${sum}`);
+
+
+//Print the first odd number
+const firstOddNumber = numbers.find(n => n % 2 != 0);
+console.log(`First odd number: ${firstOddNumber}`);
+
+//Generate an list of squares of all numbers
+numbers.map(n => n * n)
+	   .forEach(n => console.log(n));
+
+//Generate a list of numbers divisible by 5.
+const list = numbers.filter(n => n % 5 == 0)
+console.log(`List of numbers divisible by 5: ${list}`);	   
+
+//Print all the even numbers
+numbers.filter(n => n % 2 == 0)
+	   .forEach(n => console.log(n));
+
+	   	    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
