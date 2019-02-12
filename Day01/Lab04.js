@@ -45,10 +45,7 @@ class Account {
 	}
 	
 	printStatement() {
-		for(let i=0; i<this.transactions.length; i++) {
-			let txn = this.transactions[i];
-			console.log(`Amount: ${txn.amount}, (${txn.type} at ${txn.date.toString()})`);
-		}
+		this.transactions.forEach(txn => console.log(`Amount: ${txn.amount}, (${txn.type} at ${txn.date.toString()})`))
 	}
 }
 
