@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <style>
+            .page {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type="text/jsx">
+
+           class Header extends React.Component {
+                render() {
+                    return (<h1>Hello React Component</h1>);
+                }
+           }
+
+          class Footer extends React.Component {
+                render() {
+                    return (<h5>Copyrights reserved, 2019</h5>);
+                }
+           }
+
+           class App extends React.Component {
+               
+               render() {
+                   return (<div className="page">
+                            <Header/>
+                            <hr/>
+                            <LoginForm/>
+                            <hr/>
+                            <br/><br/>
+                            <Footer/>
+                    </div>);
+               }
+               
+           }    
+
+            
+
+           ReactDOM.render(<App/>, document.getElementById("root"));    
+
+        </script>
+    </body>
+</html>    
