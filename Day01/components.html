@@ -11,6 +11,7 @@
     </head>
     <body>
         <div id="root"></div>
+        <div id="messageholder"></div>
         <script type="text/jsx">
 
            class Header extends React.Component {
@@ -24,6 +25,39 @@
                     return (<h5>Copyrights reserved, 2019</h5>);
                 }
            }
+
+           class LoginForm extends React.Component {
+               
+               loginButtonClicked() {
+                let userName = document.getElementById("username").value;
+                let password = document.getElementById("password").value;
+                let message = "Logging in...";
+                let messageCls = "correct";
+                
+                if(userName === "admin" && password == "admin") {
+                    message = "Logging in.."
+                    messageCls = "correct";
+                    document.getElementById("loginbutton").disabled = true;
+                }   
+                else {
+                    message = "Username or password is incorrect";
+                    messageCls = "incorrect";
+                }
+                document.getElementById("message").innerHTML = message;
+               }
+               
+               render() {
+                  return (<div>
+                    <input type="text" placeholder="Username" id="username"/>
+                    <br/>
+                    <input type="password" placeholder="Password" id="password"/>
+                    <br/>
+                    <button id="loginbutton" onClick={this.loginButtonClicked}>Login</button>
+                    <h5 id="message"></h5>      
+                    </div>);
+               }
+               
+           }    
 
            class App extends React.Component {
                
