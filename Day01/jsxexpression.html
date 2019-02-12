@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type="text/jsx">
+            function getYear() {
+                return new Date().getFullYear();
+            }
+
+            function displayMessage() {
+                console.log("Button clicked");
+            }
+            let now = new Date().toLocaleTimeString();
+
+            //let header = <h1>Current Time: {now}</h1>
+            let page =  (<div>
+                <h1>Current Time: {now}</h1>
+                <br/>
+                <button onClick={displayMessage}>Click</button>    
+                <br/>
+                <p>Copyrights reserved, {getYear()}</p>    
+            </div>); 
+            ReactDOM.render(page, document.getElementById("root"));    
+        </script>
+    </body>
+</html>    
