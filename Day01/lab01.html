@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <style>
+            .correct {
+                color: green;
+            }
+            .incorrect {
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="root"></div>
+        <div id="messageholder"></div>
+        <script type="text/jsx">
+
+            function loginButtonClicked() {
+                let userName = document.getElementById("username").value;
+                let password = document.getElementById("password").value;
+                let message = "Logging in...";
+                let messageCls = "correct";
+                
+                if(userName === "admin" && password == "admin") {
+                    message = "Logging in.."
+                    messageCls = "correct";
+                    document.getElementById("loginbutton").disabled = true;
+                }   
+                else {
+                    message = "Username or password is incorrect";
+                    messageCls = "incorrect";
+                }
+                let messageElem = <h3 className={messageCls}>{message}</h3>;
+                ReactDOM.render(messageElem, document.getElementById("messageholder"));
+            }
+
+            let form = (<div>
+                <input type="text" placeholder="Username" id="username"/>
+                <br/>
+                <input type="password" placeholder="Password" id="password"/>
+                <br/>
+                <button id="loginbutton" onClick={loginButtonClicked}>Login</button>    
+            </div>);
+
+            ReactDOM.render(form, document.getElementById("root"));
+        </script>
+    </body>
+</html>    
