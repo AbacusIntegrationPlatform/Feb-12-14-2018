@@ -1,0 +1,81 @@
+<html>
+    <head>
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type="text/jsx">
+            class Lab02 extends React.Component {
+                constructor(props) {
+                    super(props);
+                    this.state = {
+                        countries: [],
+                        countrySelected: ""
+                    }
+                    this.countryChanged = this.countryChanged.bind(this);
+                }
+                
+                countryChanged(e) {
+                    this.setState({
+                        countrySelected: e.target.value
+                    })    
+                }
+                
+                componentDidMount() {
+                    let countries = [];
+                    if(localStorage.getItem("countries") !== null) {
+                        countries = JSON.parse(localStorage.getItem("countries"));
+                    }
+                    else {
+                      countries = [
+                          { name: "India", cities: ["Chennai", "Pune", "Kochi" ]},
+                          { name: "US", cities: ["Houston", "NJ", "NY City" ]},
+                          { name: "UK", cities: ["Bristol", "Essex", "London" ]}
+                        ]; 
+                    }
+                    
+                    this.setState({
+                        countries
+                    }, () => localStorage.setItem("countries", JSON.stringify(countries)));
+                }
+                
+                getCities() {
+                    let { countries, countrySelected } = this.state;
+                    let options = [];
+                    if(countrySelected !== "--SELECT--" && countrySelected !== "") {
+                        options = countries
+                            .find(it => it.name === countrySelected)
+                            .cities    
+                            .map(it => (
+                                <option key={it}>{it}</option>
+                            ));
+                    }
+                    return options;
+                }
+                
+                getCountries() {
+                    return this.state.countries.map(it => (
+                        <option key={it.name}>{it.name}</option>
+                    ));
+                }
+                
+                render() {
+                    return (<div>
+                        Country <select onChange={this.countryChanged}>
+                            <option>--SELECT--</option>
+                            { this.getCountries() }
+                        </select>
+                        <br/>
+                        City <select>
+                            <option>--SELECT--</option>
+                            { this.getCities() }
+                        </select>    
+                    </div>);
+                }
+            }
+            ReactDOM.render(<Lab02/>, document.getElementById("root"));
+        </script>
+    </body>
+</html>    

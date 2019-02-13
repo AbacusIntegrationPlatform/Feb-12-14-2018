@@ -16,6 +16,12 @@
                     this.buttonClicked = this.buttonClicked.bind(this);
                 }
                 
+                //CALLED ONLY ONCE BEFORE THE COMPONENT IS LOADED
+                componentWillMount() {
+                    console.log("componentWillMount called");
+                    //Initialize cookies etc.
+                }
+                
                 //CALLED ONLY ONCE AFTER THE COMPONENT IS LOADED
                 componentDidMount() {
                     console.log("componentDidMount called");
