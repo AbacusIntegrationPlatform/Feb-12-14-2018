@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type="text/jsx">
+            class Game {
+                
+                constructor() {
+                    this.target = Math.round(Math.random() * 100);
+                    this.attempts = 0;
+                    this.message = "";
+                }
+                
+                play(guess) {
+                    this.attempts += 1;
+                    if(guess > this.target) {
+                        this.message = "Aim Lower";
+                    }
+                    else if(guess < this.target) {
+                        this.message = "Aim Higher";
+                    }
+                    else {
+                        this.message = "You've got it";
+                    }
+                }
+                
+            }
+            class GameComponent extends React.Component {
+                
+                constructor(props) {
+                    super(props);
+                    this.state = {
+                        game: new Game(),
+                        guess: ''
+                    }
+                    this.guessChanged = this.guessChanged.bind(this);
+                    this.guessButtonClicked = this.guessButtonClicked.bind(this);
+                }
+                
+                guessChanged(e) {
+                    this.setState({
+                        guess: e.target.value
+                    })
+                }
+                
+                guessButtonClicked() {
+                    let { guess, game } = this.state;
+                    game.play(guess);
+                    this.setState({
+                        game
+                    })
+                }
+                
+                render() {
+                    let { message, attempts } = this.state.game;
+                    return (<div>
+                        <input onChange={this.guessChanged} type="text" placeholder="Guess"></input>    
+                        <br/>
+                        <button onClick={this.guessButtonClicked}>Guess</button>    
+                        <h1>{message}</h1>    
+                        {
+                                attempts > 0 
+                                ?
+                                <h2>Attempts: {attempts}</h2>            
+                                :
+                                <h2></h2>
+                        }
+                        
+                    </div>);
+                }
+                
+            }
+            ReactDOM.render(<GameComponent/>, document.getElementById("root"));
+        </script>
+    </body>
+</html>    
