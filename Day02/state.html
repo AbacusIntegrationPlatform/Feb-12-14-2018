@@ -29,6 +29,7 @@
                 
                 getTimeButtonClicked() {
                     let currentTime = new Date().toLocaleTimeString();
+                    document.getElementById("timelabel").innerHTML = currentTime;
                     //this.state.currentTime = currentTime;
                     //AUTOMATICALLY CALL RENDER AGAIN
                     this.setState({
@@ -38,7 +39,7 @@
                 
                 render() {
                     console.log("render called");
-                    return (<div>
+                    return (<div>   
                         <button onClick={this.getTemperatureButtonClicked}>Get Temperature</button>
                         <h1>{this.state.currentTemperature}</h1>    
                         <button onClick={this.getTimeButtonClicked}>Get Time</button>
