@@ -13,6 +13,9 @@
                     this.target = Math.round(Math.random() * 100);
                     this.attempts = 0;
                     this.message = "";
+                    this.gameOver = false;
+                    this.gameHistory = [];
+                    console.log (this.target);
                 }
                 
                 play(guess) {
@@ -25,7 +28,13 @@
                     }
                     else {
                         this.message = "You've got it";
+                        this.gameOver = true;
                     }
+                    this.gameHistory.push({
+                       attempt: this.attempts,
+                       guess,
+                       message: this.message    
+                    });
                 }
                 
             }
@@ -55,8 +64,19 @@
                     })
                 }
                 
+                getGameHistory() {
+                    let { gameHistory } = this.state.game;
+                    let rows = [];
+                    rows = gameHistory.map(item => (<tr>
+                        <td>{item.attempt}</td>
+                        <td>{item.guess}</td>
+                        <td>{item.message}</td>    
+                    </tr>));
+                    return rows;
+                }
+                
                 render() {
-                    let { message, attempts } = this.state.game;
+                    let { message, attempts, gameOver } = this.state.game;
                     return (<div>
                         <input onChange={this.guessChanged} type="text" placeholder="Guess"></input>    
                         <br/>
@@ -69,7 +89,19 @@
                                 :
                                 <h2></h2>
                         }
-                        
+                        <hr/>
+                        <table style={{display: gameOver ? "block" : "none"}}>
+                            <thead>
+                                <tr>
+                                    <th>Attempt</th>
+                                    <th>Guess</th>
+                                    <th>Message</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                { this.getGameHistory() }
+                            </tbody>
+                        </table>
                     </div>);
                 }
                 
