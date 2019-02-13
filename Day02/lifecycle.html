@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type="text/jsx">
+            class Lifecycle extends React.Component {
+                constructor(props) {
+                    super(props);
+                    this.state = {
+                      message: ''  
+                    };
+                    this.buttonClicked = this.buttonClicked.bind(this);
+                }
+                
+                //CALLED ONLY ONCE AFTER THE COMPONENT IS LOADED
+                componentDidMount() {
+                    console.log("componentDidMount called");
+                    //CALLS TO THE SERVER
+                }
+                
+                //CALLED AFTER EVERY setState() and render() method call
+                componentDidUpdate() {
+                    console.log("componentDidUpdate called");  
+                    //Non-UI related operations
+                }
+                
+                shouldComponentUpdate(obj, latest) {
+                    console.log("shouldComponentUpdate called", latest, this.state.message);
+		            return false;
+                }
+
+                buttonClicked() {
+                    console.log("buttonClicked called")
+                    this.setState({
+                        message: new Date().toLocaleTimeString()
+                    });
+                }
+                render() {
+                    console.log("render called");
+                    return (<div>
+                        <button onClick={this.buttonClicked}>Click</button>
+                        <h1>{ this.state.message }</h1>    
+                    </div>);
+        }
+    }
+    ReactDOM.render(<Lifecycle/>,document.getElementById("root"));
+        </script>
+    </body>
+</html>    
