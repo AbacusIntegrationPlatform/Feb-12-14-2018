@@ -15,6 +15,7 @@
                         countrySelected: ""
                     }
                     this.countryChanged = this.countryChanged.bind(this);
+                  
                 }
                 
                 countryChanged(e) {
@@ -24,22 +25,33 @@
                 }
                 
                 componentDidMount() {
-                    let countries = [];
-                    if(localStorage.getItem("countries") !== null) {
-                        countries = JSON.parse(localStorage.getItem("countries"));
-                    }
-                    else {
-                      countries = [
-                          { name: "India", cities: ["Chennai", "Pune", "Kochi" ]},
-                          { name: "US", cities: ["Houston", "NJ", "NY City" ]},
-                          { name: "UK", cities: ["Bristol", "Essex", "London" ]}
-                        ]; 
-                    }
-                    
-                    this.setState({
-                        countries
-                    }, () => localStorage.setItem("countries", JSON.stringify(countries)));
+                      this.loadCountries();
+                    //setTimeout(() => this.loadCountries(), 5000);            
                 }
+                
+                loadCountries() {
+                    setTimeout(() => {
+                        let countries = [];
+                        if(localStorage.getItem("countries") !== null) {
+                            countries = JSON.parse(localStorage.getItem("countries"));
+                        }
+                        else {
+                          countries = [
+                              { name: "India", cities: ["Chennai", "Pune", "Kochi" ]},
+                              { name: "US", cities: ["Houston", "NJ", "NY City" ]},
+                              { name: "UK", cities: ["Bristol", "Essex", "London" ]}
+                            ]; 
+                        }
+
+                        this.setState({
+                            countries
+                        }, () => localStorage.setItem("countries", JSON.stringify(countries)));
+                    
+                    }, 10000);
+                    
+                    
+                }
+                
                 
                 getCities() {
                     let { countries, countrySelected } = this.state;
