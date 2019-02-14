@@ -11,6 +11,15 @@
 
 * React JS code is componentized
 
+
+## JSX
+
+* JavaScript XML
+* The rules of XML apply to UI also
+* Every start tag should have a corresponding end tag
+* There should be one and only root element
+
+
 ## What is JavaScript? 
 
 * Client-side scripting language (???)
